@@ -64,7 +64,7 @@ public class SimpleQueueSolution {
     /// </summary>
     /// <param name="value">Integer value to add to the queue</param>
     private void Enqueue(int value) {
-        _queue.Add(value); // Defect 2 - Need to add to the end of the queue
+        _queue.Add(value); // Fix: Need to add to the end of the queue
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ public class SimpleQueueSolution {
         if (_queue.Count <= 0)
             throw new IndexOutOfRangeException();
 
-        var value = _queue[0]; // Defect 1 - lists start at index 0
+        var value = _queue[0]; // Fix: Lists start at index 0
         _queue.RemoveAt(0);
         return value;
     }

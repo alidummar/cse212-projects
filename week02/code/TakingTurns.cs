@@ -10,7 +10,6 @@
  */
 public static class TakingTurns {
     public static void Test() {
-        // TODO Problem 1 - Run test cases and fix the code to match requirements
         // Test Cases
 
         // Test 1
@@ -18,14 +17,13 @@ public static class TakingTurns {
         //           run until the queue is empty
         // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
         Console.WriteLine("Test 1");
-        var players = new TakingTurnsQueue();
-        players.AddPerson("Bob", 2);
-        players.AddPerson("Tim", 5);
-        players.AddPerson("Sue", 3);
-        // Console.WriteLine(players);    // This can be un-commented out for debug help
-        while (players.Length > 0)
-            players.GetNextPerson();
-        // Defect(s) Found: 
+        var players1 = new TakingTurnsQueue();
+        players1.AddPerson("Bob", 2);
+        players1.AddPerson("Tim", 5);
+        players1.AddPerson("Sue", 3);
+        while (players1.Length > 0)
+            players1.GetNextPerson();
+        // Defect(s) Found: None
 
         Console.WriteLine("---------");
 
@@ -34,21 +32,18 @@ public static class TakingTurns {
         //           After running 5 times, add George with 3 turns.  Run until the queue is empty.
         // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
         Console.WriteLine("Test 2");
-        players = new TakingTurnsQueue();
-        players.AddPerson("Bob", 2);
-        players.AddPerson("Tim", 5);
-        players.AddPerson("Sue", 3);
+        var players2 = new TakingTurnsQueue();
+        players2.AddPerson("Bob", 2);
+        players2.AddPerson("Tim", 5);
+        players2.AddPerson("Sue", 3);
         for (int i = 0; i < 5; i++) {
-            players.GetNextPerson();
-            // Console.WriteLine(players);
+            players2.GetNextPerson();
         }
 
-        players.AddPerson("George", 3);
-        // Console.WriteLine(players);
-        while (players.Length > 0)
-            players.GetNextPerson();
-
-        // Defect(s) Found: 
+        players2.AddPerson("George", 3);
+        while (players2.Length > 0)
+            players2.GetNextPerson();
+        // Defect(s) Found: None
 
         Console.WriteLine("---------");
 
@@ -57,16 +52,14 @@ public static class TakingTurns {
         //           Run 10 times.
         // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
         Console.WriteLine("Test 3");
-        players = new TakingTurnsQueue();
-        players.AddPerson("Bob", 2);
-        players.AddPerson("Tim", 0);
-        players.AddPerson("Sue", 3);
-        // Console.WriteLine(players);
+        var players3 = new TakingTurnsQueue();
+        players3.AddPerson("Bob", 2);
+        players3.AddPerson("Tim", 0);
+        players3.AddPerson("Sue", 3);
         for (int i = 0; i < 10; i++) {
-            players.GetNextPerson();
-            // Console.WriteLine(players);
+            players3.GetNextPerson();
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: None
 
         Console.WriteLine("---------");
 
@@ -74,8 +67,8 @@ public static class TakingTurns {
         // Scenario: Try to get the next person from an empty queue
         // Expected Result: Error message should be displayed
         Console.WriteLine("Test 4");
-        players = new TakingTurnsQueue();
-        players.GetNextPerson();
-        // Defect(s) Found:
+        var players4 = new TakingTurnsQueue();
+        players4.GetNextPerson();
+        // Defect(s) Found: None
     }
 }

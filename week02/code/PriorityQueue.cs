@@ -14,12 +14,11 @@ public class PriorityQueue {
     public int Length => _queue.Count;
 
     /// <summary>
-    /// Add a new value to the queue with an associated priority.  The
-    /// node is always added to the back of the queue irregardless of 
-    /// the priority.
+    /// Enqueues a new item with an associated priority. The item is consistently added to the rear of the queue, irrespective of its priority.
     /// </summary>
-    /// <param name="value">The value</param>
-    /// <param name="priority">The priority</param>
+    /// <param name="value">The value of the item</param>
+    /// <param name="priority">The priority associated with the item</param>
+
     public void Enqueue(string value, int priority) {
         var newNode = new PriorityItem(value, priority);
         _queue.Add(newNode);
@@ -32,14 +31,14 @@ public class PriorityQueue {
             return null;
         }
 
-        // Find the index of the item with the highest priority to remove
+        // Determine the index of the item with the highest priority to be removed
         var highPriorityIndex = 0;
         for (int index = 1; index < _queue.Count; index++) {
             if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
                 highPriorityIndex = index;
         }
 
-        // Remove and return the item with the highest priority
+        // Extract and return the item with the highest priority for removal
         var value = _queue[highPriorityIndex].Value;
         _queue.RemoveAt(highPriorityIndex);
         return value;

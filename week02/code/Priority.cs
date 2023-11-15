@@ -8,91 +8,51 @@
  * GitHub repository, unshared Google Drive folder) is acceptable.
  *
  */
- public class PriorityQueue<T>
-{
-    private readonly List<(T Data, int Priority)> _queue = new List<(T Data, int Priority)>();
-
-    public void Enqueue(T data, int priority)
-    {
-        _queue.Add((data, priority));
-    }
-
-    public T Dequeue()
-    {
-        if (_queue.Count == 0)
-        {
-            Console.WriteLine("Error: Queue is empty.");
-            return default(T);
-        }
-
-        var highestPriorityItems = _queue.Where(item => item.Priority == _queue.Max(x => x.Priority)).ToList();
-        var itemToRemove = highestPriorityItems.First();
-        _queue.Remove(itemToRemove);
-
-        return itemToRemove.Data;
-    }
-
-    public void DisplayQueue()
-    {
-        foreach (var item in _queue)
-        {
-            Console.WriteLine($"Data: {item.Data}, Priority: {item.Priority}");
-        }
-    }
-}
-
-public static class Priority
-{
-    public static void Test()
-    {
+public static class Priority {
+    public static void Test() {
+        // TODO Problem 2 - Write and run test cases and fix the code to match requirements
         // Example of creating and using the priority queue
-        var priorityQueue = new PriorityQueue<string>();
-        priorityQueue.Enqueue("Item1", 3);
-        priorityQueue.Enqueue("Item2", 1);
-        priorityQueue.Enqueue("Item3", 2);
-        priorityQueue.DisplayQueue();
 
         // Test Cases
 
         // Test 1
+        // Scenario: Queue with the following priority items: N (2), T (0), K (2), L (7)
+        // Expected Result: L, N, K, T
         Console.WriteLine("Test 1");
-        var priorityQueue1 = new PriorityQueue<string>();
-        priorityQueue1.Enqueue("Item1", 3);
-        priorityQueue1.Enqueue("Item2", 1);
-        priorityQueue1.Enqueue("Item3", 2);
-
-        Console.WriteLine("Dequeuing items:");
-        Console.WriteLine(priorityQueue1.Dequeue()); // Expected: Item1
-        Console.WriteLine(priorityQueue1.Dequeue()); // Expected: Item3
-        Console.WriteLine(priorityQueue1.Dequeue()); // Expected: Item2
+        var priorityQueue = new PriorityQueue();
+        priorityQueue.Enqueue("N", 2);
+        priorityQueue.Enqueue("T", 0);
+        priorityQueue.Enqueue("K", 2);
+        priorityQueue.Enqueue("L", 7);
+        // Console.WriteLine(priorityQueue);
+        while (priorityQueue.Length > 0)
+        {
+            string value = priorityQueue.Dequeue();
+            Console.WriteLine(value);
+        }
+        // Defect(s) Found: 
+        /*  1) Stop in FOR loop in PriorityQueue.Dequeue() should be at _queue.Count, not 
+                _queue.Count - 1;
+            2) The IF statement should check if the priority at the current index is greater than,
+                not greater than or equal to.
+            3) One the highest priority is found, that item should be removed from the queue.
+         */
 
         Console.WriteLine("---------");
 
         // Test 2
+        // Scenario: Queue with the following priority items: null
+        // Expected Result: The queue is empty.
         Console.WriteLine("Test 2");
-        var priorityQueue2 = new PriorityQueue<int>();
-        priorityQueue2.Dequeue(); // Expected: Error message
+        priorityQueue = new PriorityQueue();
+        // Console.WriteLine(priorityQueue);
+        priorityQueue.Dequeue();
+        // Defect(s) Found: 
+        /* None.
+         */
 
         Console.WriteLine("---------");
 
-        // Test 3
-        Console.WriteLine("Test 3");
-        var priorityQueue3 = new PriorityQueue<string>();
-        priorityQueue3.Enqueue("Item1", 3);
-        priorityQueue3.Enqueue("Item2", 3);
-        priorityQueue3.Enqueue("Item3", 2);
-        priorityQueue3.Enqueue("Item4", 3);
-
-        Console.WriteLine("Dequeuing items:");
-        Console.WriteLine(priorityQueue3.Dequeue()); // Expected: Item1 (FIFO for same priority)
-        Console.WriteLine(priorityQueue3.Dequeue()); // Expected: Item2
-        Console.WriteLine(priorityQueue3.Dequeue()); // Expected: Item4 (FIFO for same priority)
-        Console.WriteLine(priorityQueue3.Dequeue()); // Expected: Item3
-
-        Console.WriteLine("---------");
-
-        // Add more Test Cases As Needed Below...
-
-        // Ensure to cover all requirements with your test cases.
+        // Add more Test Cases As Needed Below
     }
 }

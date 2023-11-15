@@ -8,90 +8,84 @@
  * GitHub repository, unshared Google Drive folder) is acceptable.
  *
  */
-public class TakingTurnsQueue
-{
-    private Queue<(string Name, int Turns)> queue = new Queue<(string Name, int Turns)>();
-
-    public int Length => queue.Count;
-
-    public void AddPerson(string name, int turns)
-    {
-        queue.Enqueue((name, turns));
-    }
-
-    public void GetNextPerson()
-    {
-        if (queue.Count == 0)
-        {
-            Console.WriteLine("Error: Queue is empty.");
-            return;
-        }
-
-        var person = queue.Dequeue();
-        Console.WriteLine(person.Name);
-
-        if (person.Turns > 0)
-        {
-            person.Turns--;
-            queue.Enqueue(person);
-        }
-    }
-}
-
-public static class TakingTurns
-{
-    public static void Test()
-    {
+public static class TakingTurns {
+    public static void Test() {
+        // TODO Problem 1 - Run test cases and fix the code to match requirements
         // Test Cases
 
         // Test 1
+        // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
+        //           run until the queue is empty
+        // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
         Console.WriteLine("Test 1");
-        var players1 = new TakingTurnsQueue();
-        players1.AddPerson("Bob", 2);
-        players1.AddPerson("Tim", 5);
-        players1.AddPerson("Sue", 3);
-        while (players1.Length > 0)
-            players1.GetNextPerson();
-        // Defect(s) Found: None
+        var players = new TakingTurnsQueue();
+        players.AddPerson("Bob", 2);
+        players.AddPerson("Tim", 5);
+        players.AddPerson("Sue", 3);
+        // Console.WriteLine(players);    // This can be un-commented out for debug help
+        while (players.Length > 0)
+            players.GetNextPerson();
+        // Defect(s) Found:
+        /*  PersonQueue.Enqueue() erroneously used the List.Insert() method to add person to the 
+         *  front of the list. Debugged by replacing this with the List.Add() method.
+         */
 
         Console.WriteLine("---------");
 
         // Test 2
+        // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
+        //           After running 5 times, add George with 3 turns.  Run until the queue is empty.
+        // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
         Console.WriteLine("Test 2");
-        var players2 = new TakingTurnsQueue();
-        players2.AddPerson("Bob", 2);
-        players2.AddPerson("Tim", 5);
-        players2.AddPerson("Sue", 3);
-        for (int i = 0; i < 5; i++)
-        {
-            players2.GetNextPerson();
+        players = new TakingTurnsQueue();
+        players.AddPerson("Bob", 2);
+        players.AddPerson("Tim", 5);
+        players.AddPerson("Sue", 3);
+        for (int i = 0; i < 5; i++) {
+            players.GetNextPerson();
+            // Console.WriteLine(players);
         }
 
-        players2.AddPerson("George", 3);
-        while (players2.Length > 0)
-            players2.GetNextPerson();
-        // Defect(s) Found: None
+        players.AddPerson("George", 3);
+        // Console.WriteLine(players);
+        while (players.Length > 0)
+            players.GetNextPerson();
+
+        // Defect(s) Found: 
+        /*  With the Enqueue() method debugged for Test 1, Test 2 runs without error.
+         */
 
         Console.WriteLine("---------");
 
         // Test 3
+        // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
+        //           Run 10 times.
+        // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
         Console.WriteLine("Test 3");
-        var players3 = new TakingTurnsQueue();
-        players3.AddPerson("Bob", 2);
-        players3.AddPerson("Tim", 0);
-        players3.AddPerson("Sue", 3);
-        for (int i = 0; i < 10; i++)
-        {
-            players3.GetNextPerson();
+        players = new TakingTurnsQueue();
+        players.AddPerson("Bob", 2);
+        players.AddPerson("Tim", 0);
+        players.AddPerson("Sue", 3);
+        // Console.WriteLine(players);
+        for (int i = 0; i < 10; i++) {
+            players.GetNextPerson();
+            // Console.WriteLine(players);
         }
-        // Defect(s) Found: None
+        // Defect(s) Found: 
+        /*  The logic in the TakingTurnsQueue.GetNextPerson() method provided consideration for the
+         *  Forever condition. Debugged by adding an else-if statement for when Person.Turns < 1.
+         */
 
         Console.WriteLine("---------");
 
         // Test 4
+        // Scenario: Try to get the next person from an empty queue
+        // Expected Result: Error message should be displayed
         Console.WriteLine("Test 4");
-        var players4 = new TakingTurnsQueue();
-        players4.GetNextPerson();
-        // Defect(s) Found: None
+        players = new TakingTurnsQueue();
+        players.GetNextPerson();
+        // Defect(s) Found:
+        /*  No defect as error message "No one in the queue" is displayed as expected.
+         */
     }
 }

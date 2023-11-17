@@ -28,12 +28,8 @@ public class Maze {
         _mazeMap = mazeMap;
     }
 
-    // Todo Maze Problem - ADD YOUR CODE HERE
-
-    /// <summary>
-    /// Check to see if you can move left.  If you can, then move.  If you
-    /// can't move, then display "Can't go that way!"
-    /// </summary>
+   // TODO: Solve Maze Problem - Implement code for checking and moving left.
+    // If movement is possible, execute the move; otherwise, display "Can't go that way!"
     public void MoveLeft() {
         // FILL IN CODE
         if (_mazeMap[(_currX, _currY)][_LEFT])
@@ -47,9 +43,9 @@ public class Maze {
     }
 
     /// <summary>
-    /// Check to see if you can move right.  If you can, then move.  If you
-    /// can't move, then display "Can't go that way!"
+    /// Check if moving right is possible. If yes, execute the move. If not, display "Can't go that way!"
     /// </summary>
+
     public void MoveRight() {
         // FILL IN CODE
         if (_mazeMap[(_currX, _currY)][_RIGHT])
@@ -61,11 +57,10 @@ public class Maze {
             Console.WriteLine("Can't move right!");
         }
     }
+        /// <summary>
+        /// Check if moving up is possible. If yes, execute the move. If not, display "Can't go that way!"
+        /// </summary>
 
-    /// <summary>
-    /// Check to see if you can move up.  If you can, then move.  If you
-    /// can't move, then display "Can't go that way!"
-    /// </summary>
     public void MoveUp() {
         // FILL IN CODE
         if (_mazeMap[(_currX, _currY)][_UP])
@@ -77,11 +72,10 @@ public class Maze {
             Console.WriteLine("Can't move up!");
         }
     }
+        /// <summary>   
+        /// Check if moving down is possible. If yes, execute the move. If not, display "Can't go that way!"
+        /// </summary>
 
-    /// <summary>
-    /// Check to see if you can move down.  If you can, then move.  If you
-    /// can't move, then display "Can't go that way!"
-    /// </summary>
     public void MoveDown() {
         // FILL IN CODE
         if (_mazeMap[(_currX, _currY)][_DOWN])

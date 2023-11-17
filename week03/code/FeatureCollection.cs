@@ -1,6 +1,6 @@
 public class FeatureCollection {
-    // Todo Earthquake Problem - ADD YOUR CODE HERE
-    // Create additional classes as necessary
+    // TODO: Address Earthquake Problem - Implement your solution in this section
+    // Create any additional classes required for the solution
     public Metadata metadata { get; set; }
     public List<Feature> features { get; set; }
 }

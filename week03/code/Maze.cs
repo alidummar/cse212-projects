@@ -19,17 +19,31 @@ public class Maze {
     private int _currX = 1;
     private int _currY = 1;
 
+    private readonly int _LEFT = 0;
+    private readonly int _RIGHT = 1;
+    private readonly int _UP = 2;
+    private readonly int _DOWN = 3;
+
     public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap) {
         _mazeMap = mazeMap;
     }
 
     // Todo Maze Problem - ADD YOUR CODE HERE
+
     /// <summary>
     /// Check to see if you can move left.  If you can, then move.  If you
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveLeft() {
         // FILL IN CODE
+        if (_mazeMap[(_currX, _currY)][_LEFT])
+        {
+            _currX--;
+            Console.WriteLine($"Moving left to ({_currX}, {_currY}).");
+        }
+        else{
+            Console.WriteLine("Can't move left!");
+        }
     }
 
     /// <summary>
@@ -38,6 +52,14 @@ public class Maze {
     /// </summary>
     public void MoveRight() {
         // FILL IN CODE
+        if (_mazeMap[(_currX, _currY)][_RIGHT])
+        {
+            _currX++;
+            Console.WriteLine($"Moving right to ({_currX}, {_currY}).");
+        }
+        else{
+            Console.WriteLine("Can't move right!");
+        }
     }
 
     /// <summary>
@@ -46,6 +68,14 @@ public class Maze {
     /// </summary>
     public void MoveUp() {
         // FILL IN CODE
+        if (_mazeMap[(_currX, _currY)][_UP])
+        {
+            _currY--;
+            Console.WriteLine($"Moving up to ({_currX}, {_currY}).");
+        }
+        else{
+            Console.WriteLine("Can't move up!");
+        }
     }
 
     /// <summary>
@@ -54,6 +84,14 @@ public class Maze {
     /// </summary>
     public void MoveDown() {
         // FILL IN CODE
+        if (_mazeMap[(_currX, _currY)][_DOWN])
+        {
+            _currY++;
+            Console.WriteLine($"Moving down to ({_currX}, {_currY}).");
+        }
+        else{
+            Console.WriteLine("Can't move down!");
+        }
     }
 
     public void ShowStatus() {

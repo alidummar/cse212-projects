@@ -10,32 +10,34 @@
  */
 public static class TakingTurns {
     public static void Test() {
-        // TODO Problem 1 - Run test cases and fix the code to match requirements
-        // Test Cases
+         // TODO Problem 1 - Execute test cases and align code with specified requirements
+        // Test Cases:
+         // Test 1
+         // Description: Initialize a queue with individuals and assigned turns: Bob (2), Tim (5), Sue (3),
+        //              and iterate until the queue is exhausted.
+        // Expected Outcome: Sequence of individuals: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
 
-        // Test 1
-        // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
-        //           run until the queue is empty
-        // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
         Console.WriteLine("Test 1");
         var players = new TakingTurnsQueue();
         players.AddPerson("Bob", 2);
         players.AddPerson("Tim", 5);
         players.AddPerson("Sue", 3);
-        // Console.WriteLine(players);    // This can be un-commented out for debug help
+        // Console.WriteLine(players); // Uncomment this line for debugging assistance
+
         while (players.Length > 0)
             players.GetNextPerson();
-        // Defect(s) Found:
-        /*  PersonQueue.Enqueue() erroneously used the List.Insert() method to add person to the 
-         *  front of the list. Debugged by replacing this with the List.Add() method.
-         */
+       // Defect(s) Found:
+        /* 
+         * PersonQueue.Enqueue() erroneously used the List.Insert() method to add a person to the 
+        * front of the list. Debugged by replacing this with the List.Add() method.
+        */
+
 
         Console.WriteLine("---------");
-
         // Test 2
         // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
-        //           After running 5 times, add George with 3 turns.  Run until the queue is empty.
-        // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
+        // After running 5 times, add George with 3 turns.  Run until the queue is empty.
+     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George        
         Console.WriteLine("Test 2");
         players = new TakingTurnsQueue();
         players.AddPerson("Bob", 2);
@@ -80,12 +82,15 @@ public static class TakingTurns {
 
         // Test 4
         // Scenario: Try to get the next person from an empty queue
-        // Expected Result: Error message should be displayed
+        // Expected Result: An error message should be displayed
+
         Console.WriteLine("Test 4");
         players = new TakingTurnsQueue();
         players.GetNextPerson();
-        // Defect(s) Found:
-        /*  No defect as error message "No one in the queue" is displayed as expected.
-         */
+       // Defect(s) Found:
+        /*  
+         * No defect found as the error message "No one in the queue" is displayed as expected.
+        */
+
     }
 }

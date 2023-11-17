@@ -1,3 +1,4 @@
+using System.Data;
 using System.Text.Json;
 
 public static class SetsAndMapsTester {
@@ -111,6 +112,21 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        HashSet<string> set = new();
+        foreach (string word in words)
+        {
+            char[] array = word.ToCharArray();
+            Array.Reverse(array);
+            string reverse = new(array);
+            if (set.Contains(reverse))
+            {
+                Console.WriteLine($"{word} & {reverse}");
+            }
+            else
+            {
+                set.Add(word);
+            }
+        }
     }
 
     /// <summary>
@@ -132,8 +148,16 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            string degree = fields[3];
+            if (degrees.ContainsKey(degree))
+            {
+                degrees[degree]++;
+            }
+            else
+            {
+                degrees[degree] = 1;
+            }
         }
-
         return degrees;
     }
 
@@ -158,7 +182,47 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        Dictionary<char, int> characters = new();
+        char[] chars1 = word1.Trim().Replace(" ","").ToLower().ToCharArray();
+        char[] chars2 = word2.Trim().Replace(" ","").ToLower().ToCharArray();
+        if (chars1.Length != chars2.Length)
+        {
+            return false;
+        }
+        foreach (char character in chars1)
+        {
+            if (characters.ContainsKey(character))
+            {
+                characters[character]++;
+            }
+            else
+            {
+                characters[character] = 1;
+            }
+        }
+        foreach (char character in chars2)
+        {
+            if (characters.ContainsKey(character))
+            {
+                characters[character]--;
+                if (characters[character] < 0)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        foreach (int count in characters.Values)
+        {
+            if (count != 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /// <summary>
@@ -231,6 +295,22 @@ public static class SetsAndMapsTester {
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
         // 1. Add your code to map the json to the feature collection object
+        DateTime epoch = new(1970, 1, 1, 0, 0 , 0, DateTimeKind.Utc);
+        DateTime now = epoch.AddMilliseconds(featureCollection.metadata.generated);
+        int count = featureCollection.metadata.count;
+        Console.WriteLine
+        (
+            $"As of {now:h:mm tt} UTC, there have been {count} events in the past day."
+        );
+        Console.WriteLine($"{"TIME",-5} {"MAG",-5} {"EVENT",-12} LOCATION");
         // 2. Print out each place a earthquake has happened today
+        foreach (Feature feature in featureCollection.features)
+        {
+            DateTime time = epoch.AddMilliseconds(feature.properties.time);
+            string magnitude = $"{feature.properties.mag:F2}";
+            string type = feature.properties.type;
+            string place = feature.properties.place;
+            Console.WriteLine($"{time:HH:mm} {magnitude, 5} {type,-12} {place}");
+        }
     }
 }
